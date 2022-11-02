@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Fashion E-commerace</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+
+    <string name="onboarding_title">20% Discount \nNew Arrival Product</string>
+    <string name="onboarding_titlee">Take Advantage Of The Offer Shopping </string>
+    <string name="onboarding_titleee">All Types Offers Within Your Reach</string>
+
+    <string name="onboarding_desc">Publish up your selfies to make yourself \nmore beautiful with this app.</string>
+    <string name="welcome">Welcome!</string>
+    <string name="login_text_description">please login or sign up to continue our app</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="or">or</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with_apple">Continue with Apple</string>
+
+
+</resources>
