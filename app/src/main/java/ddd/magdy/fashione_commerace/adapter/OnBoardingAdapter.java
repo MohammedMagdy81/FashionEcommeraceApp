@@ -1,4 +1,4 @@
-package ddd.magdy.fashione_commerace.ui.onboarding;
+package ddd.magdy.fashione_commerace.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ddd.magdy.fashione_commerace.R;
+import ddd.magdy.fashione_commerace.model.ItemOnBoarding;
 
 public class OnBoardingAdapter extends RecyclerView.Adapter<OnBoardingAdapter.OnBoardingViewHolder> {
 

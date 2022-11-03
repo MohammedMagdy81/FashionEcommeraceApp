@@ -1,4 +1,4 @@
-package ddd.magdy.fashione_commerace.ui.onboarding;
+package ddd.magdy.fashione_commerace.model;
 
 public class ItemOnBoarding {
 

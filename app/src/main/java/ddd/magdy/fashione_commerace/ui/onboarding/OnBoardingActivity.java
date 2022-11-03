@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ddd.magdy.fashione_commerace.R;
-import ddd.magdy.fashione_commerace.ui.splash.SplashActivity2;
+import ddd.magdy.fashione_commerace.adapter.OnBoardingAdapter;
+import ddd.magdy.fashione_commerace.model.ItemOnBoarding;
+import ddd.magdy.fashione_commerace.ui.accountoption.AccountOptionActivity;
 
 public class OnBoardingActivity extends AppCompatActivity {
 
@@ -53,7 +55,7 @@ public class OnBoardingActivity extends AppCompatActivity {
             if (pager2.getCurrentItem() + 1 < onBoardingAdapter.getItemCount()) {
                 pager2.setCurrentItem(pager2.getCurrentItem() + 1);
             } else {
-                startActivity(new Intent(OnBoardingActivity.this, SplashActivity2.class));
+                startActivity(new Intent(OnBoardingActivity.this, AccountOptionActivity.class));
                 finish();
             }
         });

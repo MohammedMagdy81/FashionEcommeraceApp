@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1089891459774",
+    "project_id": "fashionapp-aa6c2",
+    "storage_bucket": "fashionapp-aa6c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1089891459774:android:f1b5d2a6cf7813d25a34ef",
+        "android_client_info": {
+          "package_name": "ddd.magdy.fashione_commerace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1089891459774-dcdroqu44hbj4t3li87n26hvmboro62o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRHYKxQ_-98UM21bXMh7fIebQmwOyX0PU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1089891459774-dcdroqu44hbj4t3li87n26hvmboro62o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
