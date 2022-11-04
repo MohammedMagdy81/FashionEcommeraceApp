@@ -24,8 +24,10 @@
     <string name="start_shopping">Start Shopping</string>
 
     <string name="web_client_id">1089891459774-dcdroqu44hbj4t3li87n26hvmboro62o.apps.googleusercontent.com</string>
-
-
+    <string name="home">Home</string>
+    <string name="cart">Cart</string>
+    <string name="notification">Notification</string>
+    <string name="profile">Profile</string>
 
 
 </resources>

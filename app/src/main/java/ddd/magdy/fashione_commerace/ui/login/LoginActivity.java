@@ -29,6 +29,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import ddd.magdy.fashione_commerace.MainActivity;
 import ddd.magdy.fashione_commerace.R;
+import ddd.magdy.fashione_commerace.SuccessActivity;
 import ddd.magdy.fashione_commerace.databinding.ActivityLoginBinding;
 import ddd.magdy.fashione_commerace.viewmodels.LoginViewModel;
 
@@ -94,9 +95,7 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
 
         });
         binding.loginGmail.setOnClickListener(v -> {
-
             signInWithGmail();
-
         });
         binding.loginApple.setOnClickListener(v -> {
 
@@ -134,7 +133,7 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
             mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(this, "Login Success ", Toast.LENGTH_LONG).show();
-                    goToHome();
+                    goToSuccess();
                 }
             });
 
@@ -142,6 +141,7 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
             showAlertDialog(e.getMessage());
         }
     }
+
 
     private void setUpEditTextIconVisible() {
         binding.loginEditTextEmail.addTextChangedListener(new TextWatcher() {
@@ -203,8 +203,8 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
 
 
     @Override
-    public void goToHome() {
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+    public void goToSuccess() {
+        startActivity(new Intent(LoginActivity.this, SuccessActivity.class));
         finish();
     }
 

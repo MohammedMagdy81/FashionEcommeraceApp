@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/home_item"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home"
+        app:cnb_backgroundColor="@color/black"
+        app:cnb_iconColor="@color/white"
+        app:cnb_iconTintMode="src_in"
+
+        app:cnb_textColor="@color/light_grey"/>
+
+    <item android:id="@+id/cart_item"
+        android:title="@string/cart"
+        android:icon="@drawable/ic_shopping_cart"
+        app:cnb_backgroundColor="@color/black"
+        app:cnb_iconColor="@color/white"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/light_grey" />
+
+    <item android:id="@+id/notification_item"
+        android:title="@string/notification"
+        android:icon="@drawable/ic_notifications"
+        app:cnb_backgroundColor="@color/black"
+        app:cnb_iconColor="@color/white"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/light_grey"/>
+
+    <item android:id="@+id/person_item"
+        android:title="@string/profile"
+        android:icon="@drawable/ic_person"
+        app:cnb_backgroundColor="@color/black"
+        app:cnb_iconColor="@color/white"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="@color/light_grey"/>
+</menu>
