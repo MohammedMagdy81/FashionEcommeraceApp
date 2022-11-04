@@ -31,6 +31,7 @@ import ddd.magdy.fashione_commerace.MainActivity;
 import ddd.magdy.fashione_commerace.R;
 import ddd.magdy.fashione_commerace.SuccessActivity;
 import ddd.magdy.fashione_commerace.databinding.ActivityLoginBinding;
+import ddd.magdy.fashione_commerace.utils.Constant;
 import ddd.magdy.fashione_commerace.viewmodels.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity implements LoginNavigator {
@@ -48,18 +49,6 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         viewModel.navigator = this;
         mAuth = FirebaseAuth.getInstance();
-
-//        BeginSignInRequest build = BeginSignInRequest.builder()
-//                .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-//                        .setSupported(true)
-//                        // Your server's client ID, not your Android client ID.
-//                        .setServerClientId(getString(R.string.default_web_client_id))
-//                        // Only show accounts previously used to sign in.
-//                        .setFilterByAuthorizedAccounts(true)
-//                        .build())
-//                .build();
-
-
         setUpClickListener();
         observeToField();
     }
@@ -111,13 +100,13 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
                 .build();
         googleSignInClient = GoogleSignIn.getClient(LoginActivity.this, signInOptions);
         Intent signInIntent = googleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, 1);
+        startActivityForResult(signInIntent, Constant.LOGIN_REQUEST_CODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
+        if (requestCode == Constant.LOGIN_REQUEST_CODE) {
             // account that has been selected
             GoogleSignInAccount result = GoogleSignIn.getSignedInAccountFromIntent(data).getResult();
             if (result != null) {
