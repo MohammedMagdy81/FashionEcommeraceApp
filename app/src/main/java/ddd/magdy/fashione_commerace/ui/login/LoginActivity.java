@@ -6,12 +6,26 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import ddd.magdy.fashione_commerace.MainActivity;
 import ddd.magdy.fashione_commerace.R;
@@ -22,6 +36,8 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
 
     private ActivityLoginBinding binding;
     private LoginViewModel viewModel;
+    private FirebaseAuth mAuth;
+    private GoogleSignInClient googleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +46,19 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
         setContentView(binding.getRoot());
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         viewModel.navigator = this;
+        mAuth = FirebaseAuth.getInstance();
+
+//        BeginSignInRequest build = BeginSignInRequest.builder()
+//                .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+//                        .setSupported(true)
+//                        // Your server's client ID, not your Android client ID.
+//                        .setServerClientId(getString(R.string.default_web_client_id))
+//                        // Only show accounts previously used to sign in.
+//                        .setFilterByAuthorizedAccounts(true)
+//                        .build())
+//                .build();
+
+
         setUpClickListener();
         observeToField();
     }
@@ -66,12 +95,52 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
         });
         binding.loginGmail.setOnClickListener(v -> {
 
+            signInWithGmail();
+
         });
         binding.loginApple.setOnClickListener(v -> {
 
         });
 
         setUpEditTextIconVisible();
+    }
+
+    private void signInWithGmail() {
+        GoogleSignInOptions signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.web_client_id))
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(LoginActivity.this, signInOptions);
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            // account that has been selected
+            GoogleSignInAccount result = GoogleSignIn.getSignedInAccountFromIntent(data).getResult();
+            if (result != null) {
+                // this uer now is google user not firebase user
+                googleAuthWithFirebase(result);
+            }
+        }
+    }
+
+    private void googleAuthWithFirebase(GoogleSignInAccount result) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(result.getIdToken(), null);
+        try {
+            mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(this, "Login Success ", Toast.LENGTH_LONG).show();
+                    goToHome();
+                }
+            });
+
+        } catch (Exception e) {
+            showAlertDialog(e.getMessage());
+        }
     }
 
     private void setUpEditTextIconVisible() {
