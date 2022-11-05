@@ -25,15 +25,27 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private List<ProductResponseItem> productResponseItemList;
 
 
-    public CategoryAdapter(Context context, List<ProductResponseItem> productResponseItemList) {
+    public CategoryAdapter(Context context) {
         this.context = context;
-        this.productResponseItemList = productResponseItemList;
+
+    }
+
+    public void setData( List<ProductResponseItem> productResponseItemList){
+        this.productResponseItemList= productResponseItemList;
+        notifyDataSetChanged();
+    }
+
+
+    public OnCategoryItemClick onCategoryItemClick;
+
+    public interface OnCategoryItemClick {
+        void onCategoryItemClickListener(ProductResponseItem product, int position);
     }
 
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.item_category,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_category, parent, false);
         return new CategoryViewHolder(view);
     }
 
@@ -41,6 +53,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
         ProductResponseItem product = productResponseItemList.get(position);
         holder.bind(product);
+        if (onCategoryItemClick != null)
+            holder.itemView.setOnClickListener(v -> {
+                onCategoryItemClick.onCategoryItemClickListener(product, position);
+            });
+
     }
 
     @Override
@@ -48,14 +65,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return productResponseItemList.size();
     }
 
-    class CategoryViewHolder extends RecyclerView.ViewHolder{
+    class CategoryViewHolder extends RecyclerView.ViewHolder {
         ImageView imageProduct;
-        TextView categoryNameProduct,categoryNumProduct;
+        TextView categoryNameProduct, categoryNumProduct;
+
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageProduct= itemView.findViewById(R.id.image_view);
-            categoryNameProduct= itemView.findViewById(R.id.item_category_name);
-            categoryNumProduct= itemView.findViewById(R.id.item_category_number);
+            imageProduct = itemView.findViewById(R.id.image_view);
+            categoryNameProduct = itemView.findViewById(R.id.item_category_name);
+            categoryNumProduct = itemView.findViewById(R.id.item_category_number);
         }
 
         public void bind(ProductResponseItem product) {
@@ -65,7 +83,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                     .transition(DrawableTransitionOptions.withCrossFade(400))
                     .into(imageProduct);
             categoryNameProduct.setText(product.getCategory());
-            categoryNumProduct.setText(product.getRating().getCount()+" Product");
+            categoryNumProduct.setText(product.getRating().getCount() + " Product");
         }
     }
 }

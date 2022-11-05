@@ -9,6 +9,7 @@
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/drawable/edit_text_bg.xml" value="0.2005" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/drawable/facebook_bg.xml" value="0.1515" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/drawable/gmail_bg.xml" value="0.1515" />
+        <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/drawable/ic_fav.xml" value="0.1335" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/drawable/ic_person.xml" value="0.134" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/drawable/login_btn_bg.xml" value="0.2265" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/drawable/onboarding_indicatior.xml" value="0.2005" />
@@ -28,9 +29,11 @@
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/layout/activity_success.xml" value="0.12" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/layout/fragment_cart_shopping.xml" value="0.16216216216216217" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/layout/fragment_home.xml" value="0.144" />
+        <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/layout/fragment_home_details.xml" value="0.152" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/layout/fragment_notification.xml" value="0.16216216216216217" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/layout/fragment_profile.xml" value="0.16216216216216217" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/layout/item_category.xml" value="0.176" />
+        <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/layout/item_category_details.xml" value="0.152" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/layout/item_contianer_boarding.xml" value="0.128" />
         <entry key="..\:/Users/Eslam Majde/AndroidStudioProjects/FashionEcommerace/app/src/main/res/menu/shopping_bottom_menu.xml" value="0.16216216216216217" />
       </map>

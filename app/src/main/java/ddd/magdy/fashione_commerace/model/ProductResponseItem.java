@@ -2,7 +2,9 @@ package ddd.magdy.fashione_commerace.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ProductResponseItem{
+import java.io.Serializable;
+
+public class ProductResponseItem implements Serializable {
 
 	@SerializedName("image")
 	private String image;

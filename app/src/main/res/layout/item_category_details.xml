@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+   >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="194dp"
+        android:layout_height="274dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardCornerRadius="30dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardElevation="6dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/item_image_product_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/image_test_item"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageView
+                android:id="@+id/item_icon_favorite_product_detail"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="12dp"
+                app:srcCompat="@drawable/ic_fav"
+                android:background="@drawable/onboarding_elips"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/item__product_name_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/card_view"
+        app:layout_constraintStart_toStartOf="@id/card_view"
+        app:layout_constraintEnd_toEndOf="@id/card_view"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="6dp"
+        android:text="Bags"/>
+    <TextView
+        android:id="@+id/item__product_desc_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:gravity="center"
+        android:ellipsize="end"
+        app:layout_constraintTop_toBottomOf="@id/item__product_name_detail"
+        app:layout_constraintStart_toStartOf="@id/card_view"
+        app:layout_constraintEnd_toEndOf="@id/card_view"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="6dp"
+        android:text="Daily Bags"/>
+    <TextView
+        android:id="@+id/item__product_price_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/item__product_desc_detail"
+        app:layout_constraintStart_toStartOf="@id/card_view"
+        app:layout_constraintEnd_toEndOf="@id/card_view"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="6dp"
+        android:text="$ 150"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
