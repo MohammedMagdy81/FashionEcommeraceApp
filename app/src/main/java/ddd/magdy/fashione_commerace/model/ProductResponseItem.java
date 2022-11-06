@@ -24,6 +24,10 @@ public class ProductResponseItem implements Serializable {
 	@SerializedName("title")
 	private String title;
 
+	public ProductResponseItem(String category) {
+		this.category = category;
+	}
+
 	@SerializedName("category")
 	private String category;
 

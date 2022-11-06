@@ -90,6 +90,7 @@ public class HomeFragment extends Fragment {
             fragment.setArguments(bundle);
             requireActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container_fragment, fragment)
+                    .addToBackStack(null)
                     .commit();
         };
 

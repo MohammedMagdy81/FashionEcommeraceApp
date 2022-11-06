@@ -21,7 +21,7 @@ import ddd.magdy.fashione_commerace.model.ProductResponseItem;
 import ddd.magdy.fashione_commerace.utils.Constant;
 import ddd.magdy.fashione_commerace.viewmodels.CategoryDetailsViewModel;
 
-public class HomeDetailsFragment extends Fragment {
+public class HomeDetailsFragment extends Fragment implements CategoryDetailsAdapter.OnItemDetailClickListener {
 
     private FragmentHomeDetailsBinding binding;
     private CategoryDetailsAdapter adapter;
@@ -46,12 +46,22 @@ public class HomeDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        adapter.onItemDetailClickListener = this::onItemDetailClick;
         Bundle bundle = this.getArguments();
         ProductResponseItem item = (ProductResponseItem) bundle.getSerializable(Constant.PRODUCT_ITEM_KEY);
         binding.homeDetailProductName.setText(item.getCategory());
         viewModel.getItemsByCategory(item.getCategory());
         observeToField();
 
+        setUpClickListener();
+
+    }
+
+    private void setUpClickListener() {
+        binding.imageIconBack.setOnClickListener(v -> {
+            requireActivity().getSupportFragmentManager()
+                    .popBackStack();
+        });
     }
 
     private void observeToField() {
@@ -78,5 +88,13 @@ public class HomeDetailsFragment extends Fragment {
             dialog.dismiss();
         });
         builder.create().show();
+    }
+
+    @Override
+    public void onItemDetailClick(int position, ProductResponseItem item) {
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container_fragment, new ProductDetailFragment())
+                .addToBackStack(null)
+                .commit();
     }
 }

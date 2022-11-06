@@ -1,6 +1,7 @@
 package ddd.magdy.fashione_commerace.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +9,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import ddd.magdy.fashione_commerace.R;
 import ddd.magdy.fashione_commerace.model.ProductResponseItem;
@@ -30,8 +34,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     }
 
-    public void setData( List<ProductResponseItem> productResponseItemList){
-        this.productResponseItemList= productResponseItemList;
+    public void setData(List<ProductResponseItem> productResponseItemList) {
+        this.productResponseItemList = productResponseItemList;
         notifyDataSetChanged();
     }
 
@@ -49,13 +53,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         return new CategoryViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
-        ProductResponseItem product = productResponseItemList.get(position);
-        holder.bind(product);
+
+        ProductResponseItem item = productResponseItemList.get(position);
+        holder.bind(item);
+
         if (onCategoryItemClick != null)
             holder.itemView.setOnClickListener(v -> {
-                onCategoryItemClick.onCategoryItemClickListener(product, position);
+                onCategoryItemClick.onCategoryItemClickListener(item, position);
             });
 
     }
@@ -77,6 +84,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
 
         public void bind(ProductResponseItem product) {
+
             Glide.with(itemView)
                     .load(product.getImage())
                     .centerCrop()

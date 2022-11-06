@@ -18,7 +18,7 @@ import java.util.List;
 import ddd.magdy.fashione_commerace.R;
 import ddd.magdy.fashione_commerace.model.ProductResponseItem;
 
-public class CategoryDetailsAdapter extends RecyclerView.Adapter<CategoryDetailsAdapter.CategoryDetailsViewHolder>{
+public class CategoryDetailsAdapter extends RecyclerView.Adapter<CategoryDetailsAdapter.CategoryDetailsViewHolder> {
 
     List<ProductResponseItem> productResponseItems;
     Context context;
@@ -27,23 +27,36 @@ public class CategoryDetailsAdapter extends RecyclerView.Adapter<CategoryDetails
         this.context = context;
     }
 
-    public void setData( List<ProductResponseItem> productResponseItems){
-        this.productResponseItems=productResponseItems;
+    public void setData(List<ProductResponseItem> productResponseItems) {
+        this.productResponseItems = productResponseItems;
         notifyDataSetChanged();
+    }
+
+    public OnItemDetailClickListener onItemDetailClickListener;
+
+    public interface OnItemDetailClickListener {
+        void onItemDetailClick(int position, ProductResponseItem item);
     }
 
     @NonNull
     @Override
     public CategoryDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_details,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_details, parent, false);
         return new CategoryDetailsViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CategoryDetailsViewHolder holder, int position) {
 
-        ProductResponseItem product= productResponseItems.get(position);
+        ProductResponseItem product = productResponseItems.get(position);
         holder.bind(product);
+        if (onItemDetailClickListener != null) {
+            holder.itemView.setOnClickListener(v -> {
+                onItemDetailClickListener.onItemDetailClick(position, product);
+            });
+        }
+
+
     }
 
     @Override
@@ -54,7 +67,7 @@ public class CategoryDetailsAdapter extends RecyclerView.Adapter<CategoryDetails
     class CategoryDetailsViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageItem;
-        TextView mItemName,mItemPrice,mItemDesc;
+        TextView mItemName, mItemPrice, mItemDesc;
 
 
         public CategoryDetailsViewHolder(@NonNull View itemView) {
@@ -67,14 +80,14 @@ public class CategoryDetailsAdapter extends RecyclerView.Adapter<CategoryDetails
 
 
         public void bind(ProductResponseItem product) {
-                Glide.with(itemView)
-                        .load(product.getImage())
-                        .centerCrop()
-                        .transition(DrawableTransitionOptions.withCrossFade(400))
-                        .into(imageItem);
-                mItemName.setText(product.getTitle());
-                mItemDesc.setText(product.getDescription());
-                mItemPrice.setText("$ "+product.getPrice());
+            Glide.with(itemView)
+                    .load(product.getImage())
+                    .centerCrop()
+                    .transition(DrawableTransitionOptions.withCrossFade(400))
+                    .into(imageItem);
+            mItemName.setText(product.getTitle());
+            mItemDesc.setText(product.getDescription());
+            mItemPrice.setText("$ " + product.getPrice());
 
         }
     }
