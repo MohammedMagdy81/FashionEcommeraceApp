@@ -33,5 +33,9 @@
     <string name="size">Size</string>
     <string name="description">Description</string>
 
+    <string name="facebook_app_id">676061713903836</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
+
 
 </resources>

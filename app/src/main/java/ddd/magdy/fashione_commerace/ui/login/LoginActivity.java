@@ -5,8 +5,16 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -24,8 +34,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import java.util.Arrays;
 
 import ddd.magdy.fashione_commerace.MainActivity;
 import ddd.magdy.fashione_commerace.R;
@@ -41,14 +55,19 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
     private FirebaseAuth mAuth;
     private GoogleSignInClient googleSignInClient;
 
+    CallbackManager callbackManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         viewModel.navigator = this;
+
         mAuth = FirebaseAuth.getInstance();
+        callbackManager = CallbackManager.Factory.create();
         setUpClickListener();
         observeToField();
     }
@@ -82,6 +101,8 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
 
         binding.loginFacebook.setOnClickListener(v -> {
 
+            signInWithFacebook();
+
         });
         binding.loginGmail.setOnClickListener(v -> {
             signInWithGmail();
@@ -91,6 +112,28 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
         });
 
         setUpEditTextIconVisible();
+    }
+
+    private void signInWithFacebook() {
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                viewModel.handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d("MyTag",error.getMessage());
+            }
+        });
+
+
     }
 
     private void signInWithGmail() {
@@ -114,6 +157,8 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
                 googleAuthWithFirebase(result);
             }
         }
+
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     private void googleAuthWithFirebase(GoogleSignInAccount result) {
@@ -205,5 +250,20 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
         });
         builder.create().show();
     }
+
+//    private void handleFacebookAccessToken(AccessToken token) {
+//        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+//        mAuth.signInWithCredential(credential)
+//                .addOnCompleteListener(this, task -> {
+//                    if (task.isSuccessful()) {
+//                        // Sign in success, update UI with the signed-in user's information
+//                        goToSuccess();
+//                    } else {
+//                        // If sign in fails, display a message to the user.
+//                        showAlertDialog(task.getException().getMessage());
+//                    }
+//                });
+//    }
+
 
 }

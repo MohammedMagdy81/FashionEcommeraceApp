@@ -3,14 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ddd.magdy.fashione_commerace">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
+
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="false"
+        android:supportsRtl="true"
         android:theme="@style/Theme.FashionEcommerace"
         tools:targetApi="31">
         <activity
@@ -24,13 +27,19 @@
         </activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".ui.onboarding.OnBoardingActivity"
-            android:exported="true"></activity>
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".ui.accountoption.AccountOptionActivity"
-            android:exported="true"></activity>
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true">
@@ -43,6 +52,11 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"></activity>
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+
+
     </application>
 
 </manifest>
