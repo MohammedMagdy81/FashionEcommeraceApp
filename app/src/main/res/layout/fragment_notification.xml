@@ -1,15 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.NotificationFragment">
 
-    <TextView
+    <androidx.cardview.widget.CardView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="46dp"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="12dp"
+        app:layout_constraintEnd_toEndOf="parent">
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="50sp"
-        android:text="Notification" />
+        android:src="@drawable/ic_baseline_more"
+        android:layout_margin="4dp"
+       />
 
-</FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:id="@+id/notification_icon_back"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/onboarding_elips"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/icon_back"
+        app:layout_constraintBottom_toBottomOf="@+id/notification_icon_back"
+        app:layout_constraintEnd_toEndOf="@+id/notification_icon_back"
+        app:layout_constraintStart_toStartOf="@+id/notification_icon_back"
+        app:layout_constraintTop_toTopOf="@+id/notification_icon_back" />
+
+    <TextView
+        android:id="@+id/notification_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/notification_icon_back"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="@string/notification"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reviews_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/notification_text"
+        android:padding="4dp"
+        android:layout_margin="8dp"
+        tools:listitem="@layout/item_review"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

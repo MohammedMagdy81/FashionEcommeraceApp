@@ -3,6 +3,7 @@ package ddd.magdy.fashione_commerace.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ProductResponseItem implements Serializable {
 
@@ -57,5 +58,18 @@ public class ProductResponseItem implements Serializable {
 
 	public String getCategory(){
 		return category;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof ProductResponseItem)) return false;
+		ProductResponseItem item = (ProductResponseItem) o;
+		return Double.compare(item.price, price) == 0 && id == item.id && Objects.equals(image, item.image) && Objects.equals(rating, item.rating) && Objects.equals(description, item.description) && Objects.equals(title, item.title) && Objects.equals(category, item.category);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(image, price, rating, description, id, title, category);
 	}
 }

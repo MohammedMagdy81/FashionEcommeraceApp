@@ -16,11 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import ddd.magdy.fashione_commerace.R;
+import ddd.magdy.fashione_commerace.model.ProductResponse;
 import ddd.magdy.fashione_commerace.model.ProductResponseItem;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
@@ -31,7 +36,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     public CategoryAdapter(Context context) {
         this.context = context;
-
     }
 
     public void setData(List<ProductResponseItem> productResponseItemList) {
@@ -57,6 +61,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder holder, int position) {
 
+//        productResponseItemList = new ArrayList<>
+//                (new LinkedHashSet<>(productResponseItemList));
         ProductResponseItem item = productResponseItemList.get(position);
         holder.bind(item);
 

@@ -1,22 +1,26 @@
 package ddd.magdy.fashione_commerace.viewmodels;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.Arrays;
 
@@ -28,6 +32,8 @@ public class LoginViewModel extends ViewModel {
     public MutableLiveData<String> messageErrorPassword = new MutableLiveData<>();
     public MutableLiveData<String> messageError = new MutableLiveData<>();
     public MutableLiveData<Boolean> showLoading = new MutableLiveData();
+    public CallbackManager callbackManager = CallbackManager.Factory.create();
+    ;
 
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -79,4 +85,41 @@ public class LoginViewModel extends ViewModel {
         }
         return true;
     }
+
+    public void googleAuthWithFirebase(GoogleSignInAccount result) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(result.getIdToken(), null);
+        try {
+            auth.signInWithCredential(credential).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+
+                    navigator.goToSuccess();
+                }
+            });
+
+        } catch (Exception e) {
+            messageError.setValue(e.getMessage());
+        }
+    }
+
+    public void signInWithFacebook() {
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                messageError.setValue(error.getMessage());
+            }
+        });
+
+    }
+
+
 }

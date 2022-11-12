@@ -52,10 +52,8 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
 
     private ActivityLoginBinding binding;
     private LoginViewModel viewModel;
-    private FirebaseAuth mAuth;
     private GoogleSignInClient googleSignInClient;
 
-    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +64,6 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         viewModel.navigator = this;
 
-        mAuth = FirebaseAuth.getInstance();
-        callbackManager = CallbackManager.Factory.create();
         setUpClickListener();
         observeToField();
     }
@@ -116,24 +112,7 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
 
     private void signInWithFacebook() {
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                viewModel.handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Log.d("MyTag",error.getMessage());
-            }
-        });
-
-
+        viewModel.signInWithFacebook();
     }
 
     private void signInWithGmail() {
@@ -154,27 +133,12 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
             GoogleSignInAccount result = GoogleSignIn.getSignedInAccountFromIntent(data).getResult();
             if (result != null) {
                 // this uer now is google user not firebase user
-                googleAuthWithFirebase(result);
+                viewModel.googleAuthWithFirebase(result);
             }
         }
-
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        viewModel.callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void googleAuthWithFirebase(GoogleSignInAccount result) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(result.getIdToken(), null);
-        try {
-            mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    Toast.makeText(this, "Login Success ", Toast.LENGTH_LONG).show();
-                    goToSuccess();
-                }
-            });
-
-        } catch (Exception e) {
-            showAlertDialog(e.getMessage());
-        }
-    }
 
 
     private void setUpEditTextIconVisible() {

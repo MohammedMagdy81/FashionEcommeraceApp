@@ -26,6 +26,8 @@ public class HomeDetailsFragment extends Fragment implements CategoryDetailsAdap
     private FragmentHomeDetailsBinding binding;
     private CategoryDetailsAdapter adapter;
     private CategoryDetailsViewModel viewModel;
+    private Bundle bundle;
+    private ProductDetailFragment fragment;
 
 
     @Override
@@ -33,6 +35,8 @@ public class HomeDetailsFragment extends Fragment implements CategoryDetailsAdap
         super.onCreate(savedInstanceState);
         adapter = new CategoryDetailsAdapter(requireContext());
         viewModel = new ViewModelProvider((ViewModelStoreOwner) requireContext()).get(CategoryDetailsViewModel.class);
+        bundle= new Bundle();
+        fragment = new ProductDetailFragment();
     }
 
     @Override
@@ -92,8 +96,10 @@ public class HomeDetailsFragment extends Fragment implements CategoryDetailsAdap
 
     @Override
     public void onItemDetailClick(int position, ProductResponseItem item) {
+        bundle.putSerializable(Constant.PRODUCT_DETAIL_ITEM_KEY,item);
+        fragment.setArguments(bundle);
         requireActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container_fragment, new ProductDetailFragment())
+                .replace(R.id.container_fragment, fragment)
                 .addToBackStack(null)
                 .commit();
     }
