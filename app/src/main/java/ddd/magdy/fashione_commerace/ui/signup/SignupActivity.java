@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -39,6 +40,8 @@ public class SignupActivity extends AppCompatActivity implements SignUpNavigator
         setUpClickListener();
         setupIconVisible();
     }
+
+
 
     private void setupIconVisible() {
         binding.signupEditTextUserName.addTextChangedListener(new TextWatcher() {
@@ -97,7 +100,6 @@ public class SignupActivity extends AppCompatActivity implements SignUpNavigator
 
     private void setUpClickListener() {
         binding.signupBtnSignUp.setOnClickListener(v -> {
-
             String email = binding.signupEditTextEmail.getText().toString();
             String password = binding.signupInputEditTextPassword.getText().toString();
             String confirmPassword = binding.signupInputEditTextConfirmPassword.getText().toString();

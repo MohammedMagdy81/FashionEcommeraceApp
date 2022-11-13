@@ -180,8 +180,9 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/signup_btn_sign_up"
-            style="@style/AuthBtn"
+            style="@style/AuthBtnSignup"
             android:text="@string/sign_up"
+            android:background ="@drawable/signup_btn_bg"
             android:layout_marginTop="29dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

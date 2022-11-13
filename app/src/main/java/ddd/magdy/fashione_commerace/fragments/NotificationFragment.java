@@ -32,7 +32,7 @@ public class NotificationFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(NotificationViewModel.class);
-        reviewModelList= viewModel.reviewModelList();
+        reviewModelList = viewModel.reviewModelList();
         adapter = new ReviewAdapter(new ArrayList());
     }
 
@@ -51,4 +51,6 @@ public class NotificationFragment extends Fragment {
         binding.reviewsRv.setHasFixedSize(true);
         adapter.setData(reviewModelList);
     }
+
+
 }
