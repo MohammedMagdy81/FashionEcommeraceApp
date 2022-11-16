@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.MessageListFragment">
+
+    <View
+        android:id="@+id/message_list_icon_back"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="42dp"
+        android:background="@drawable/onboarding_elips"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/icon_back"
+        app:layout_constraintBottom_toBottomOf="@id/message_list_icon_back"
+        app:layout_constraintEnd_toEndOf="@id/message_list_icon_back"
+        app:layout_constraintStart_toStartOf="@id/message_list_icon_back"
+        app:layout_constraintTop_toTopOf="@id/message_list_icon_back" />
+
+    <ImageView
+        android:id="@+id/message_list_icon_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="25dp"
+        android:src="@drawable/ic_baseline_more"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/message_list_icon_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/message_list_icon_more"
+        app:layout_constraintEnd_toStartOf="@id/message_list_icon_more"
+        app:layout_constraintTop_toTopOf="@id/message_list_icon_more"
+        android:src="@drawable/notification_ic"
+        android:layout_marginEnd="12dp"
+        />
+
+    <EditText
+        android:id="@+id/message_list_et_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/message_list_icon_back"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/et_search_bg"
+        android:padding="12dp"
+        android:drawableStart="@drawable/ic_baseline_search_24"
+        android:drawablePadding="16dp"
+        android:hint="Search..."
+        />
+
+    <TextView
+        android:id="@+id/message_list_text_activities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/message_list_et_search"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="27dp"
+        android:textStyle="bold"
+        android:text="@string/activities"
+        android:textColor="@color/black"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/message_list_horzontal_rv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/message_list_text_activities"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="11dp"
+        android:layout_marginStart="10dp"
+        tools:listitem="@layout/item_person_message_list"
+        />
+
+    <TextView
+        android:id="@+id/message_list_text_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:textStyle="bold"
+        android:text="@string/messages"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/message_list_horzontal_rv"
+        app:layout_constraintStart_toStartOf="@id/message_list_text_activities"
+
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/message_list_vertical_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/message_list_text_messages"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        tools:listitem="@layout/item_chat"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

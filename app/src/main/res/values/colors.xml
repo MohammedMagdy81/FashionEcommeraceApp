@@ -14,4 +14,13 @@
     <color name="facebook_color">#3B5998</color>
 
     <color name="transparent">#E5E5E5</color>
+
+
+    <color name="test1">#00B8D4</color>
+    <color name="test2">#AA00FF</color>
+    <color name="test3">#FF6D00</color>
+
+    <color name="border_color">#06AF4C</color>
+
+
 </resources>

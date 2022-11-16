@@ -63,9 +63,25 @@ public class CartViewModel extends ViewModel {
                 });
     }
 
+    public void addToCart(ProductResponseItem item) {
+        RetrofitClient.getRetrofitClientInstance()
+                .getApi()
+                .addToCart(item).enqueue(new Callback<ProductResponseItem>() {
+                    @Override
+                    public void onResponse(Call<ProductResponseItem> call, Response<ProductResponseItem> response) {
+                        itemList.add(response.body());
+                        items.setValue(itemList);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ProductResponseItem> call, Throwable t) {
+
+                    }
+                });
+    }
 
 
-    public void addProduct(ProductItem productItem, Context context){
+    public void addProduct(ProductItem productItem, Context context) {
         showLoading.setValue(true);
         ProductDatabase.getInstance(context).productDao().addProductItem(productItem);
         showLoading.setValue(false);
@@ -73,10 +89,9 @@ public class CartViewModel extends ViewModel {
 
     }
 
-    public LiveData<List<ProductItem>> getAllProduct(Context context){
-       return ProductDatabase.getInstance(context).productDao().getAllProductItem();
+    public LiveData<List<ProductItem>> getAllProduct(Context context) {
+        return ProductDatabase.getInstance(context).productDao().getAllProductItem();
     }
-
 
 
     public MutableLiveData<List<ProductResponseItem>> getItems() {

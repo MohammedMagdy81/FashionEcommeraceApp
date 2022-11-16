@@ -5,14 +5,18 @@ import java.util.List;
 
 import ddd.magdy.fashione_commerace.model.CartItem;
 import ddd.magdy.fashione_commerace.model.ProductResponseItem;
+import ddd.magdy.fashione_commerace.model.ResponseUserItem;
 import ddd.magdy.fashione_commerace.utils.Constant;
 import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface RetrofitApi {
 
-    @GET(Constant.END_POINT_PRODUCT)
+    @GET("products")
     Call<List<ProductResponseItem>> getProduct();
 
     @GET("products/category/{category}")
@@ -24,11 +28,29 @@ public interface RetrofitApi {
     @GET("products/categories")
     Call<ArrayList<String>> getCategories();
 
+
     @GET("carts")
     Call<List<CartItem>> getProductsInCarts();
 
     @GET("carts/{id}")
     Call<CartItem> getProductsInCartsById(@Path("id") int id);
 
+    @POST("carts")
+    Call<ProductResponseItem> addToCart(@Body ProductResponseItem item);
+
+
+    @GET("users")
+    Call<List<ResponseUserItem>> getAllUsers();
+
+    @GET("users/{id}")
+    Call<ResponseUserItem> getUserById(@Path("id") int id);
+
+
 
 }
+
+
+
+
+
+

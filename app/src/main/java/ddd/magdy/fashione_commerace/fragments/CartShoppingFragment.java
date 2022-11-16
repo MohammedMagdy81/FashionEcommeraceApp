@@ -54,24 +54,39 @@ public class CartShoppingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setRecyclerView();
-        viewModel.getCartItems();
-        viewModel.getAllProduct(requireContext()).observe(getViewLifecycleOwner(), productItems -> {
-            if (productItems.size()==0){
-                binding.cartShoppingCardView.setVisibility(View.INVISIBLE);
-                binding.cartShoppingBtnProceedToCheckout.setVisibility(View.INVISIBLE);
-            }
-            adapter.setData(productItems);
-            productItems.forEach(item -> {
-                totalPrice += item.getPrice();
-                totalCountIte += item.getCount();
-            });
-            binding.cartShoppingSubtotalTxtPrice.setText("$ " + String.format("%.2f", totalPrice));
-            binding.cartShippingTxtPrice.setText("$ 20");
-            totalPrice += 20;
-            binding.cartShoppingBagtotalTxtPrice.setText("$ " +String.format("%.2f", totalPrice));
-            binding.cartShoppingItemCount.setText("( " + totalCountIte + " item)");
-
+        //viewModel.getCartItems();
+        viewModel.getItems().observe(getViewLifecycleOwner(), productResponseItemList -> {
+            adapter.setData(productResponseItemList);
         });
+
+
+
+
+
+
+
+
+
+
+
+        //viewModel.getCartItems();
+//        viewModel.getAllProduct(requireContext()).observe(getViewLifecycleOwner(), productItems -> {
+//            if (productItems.size()==0){
+//                binding.cartShoppingCardView.setVisibility(View.INVISIBLE);
+//                binding.cartShoppingBtnProceedToCheckout.setVisibility(View.INVISIBLE);
+//            }
+//            adapter.setData(productItems);
+//            productItems.forEach(item -> {
+//                totalPrice += item.getPrice();
+//                totalCountIte += item.getCount();
+//            });
+//            binding.cartShoppingSubtotalTxtPrice.setText("$ " + String.format("%.2f", totalPrice));
+//            binding.cartShippingTxtPrice.setText("$ 20");
+//            totalPrice += 20;
+//            binding.cartShoppingBagtotalTxtPrice.setText("$ " +String.format("%.2f", totalPrice));
+//            binding.cartShoppingItemCount.setText("( " + totalCountIte + " item)");
+//
+//        });
 
     }
 

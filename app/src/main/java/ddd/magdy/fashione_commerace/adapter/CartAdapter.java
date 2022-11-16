@@ -18,19 +18,20 @@ import java.util.List;
 
 import ddd.magdy.fashione_commerace.R;
 import ddd.magdy.fashione_commerace.database.ProductItem;
+import ddd.magdy.fashione_commerace.model.ProductResponseItem;
 import ddd.magdy.fashione_commerace.model.ProductsItem;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
-    List<ProductItem> items;
+    List<ProductResponseItem> items;
     Context context;
 
-    public CartAdapter(List<ProductItem> items, Context context) {
+    public CartAdapter(List<ProductResponseItem> items, Context context) {
         this.items = items;
         this.context = context;
     }
 
-    public void setData(List<ProductItem> items){
+    public void setData(List<ProductResponseItem> items){
         this.items= items;
         notifyDataSetChanged();
     }
@@ -71,16 +72,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             btnRemove = itemView.findViewById(R.id.item_cart_btn_remove);
         }
 
-        public void bind(ProductItem item) {
+        public void bind(ProductResponseItem item) {
             Glide.with(itemView)
                     .load(item.getImage())
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade(400))
                     .into(itemImage);
             itemTitle.setText(item.getTitle());
-            itemDesc.setText(item.getDesc());
+            itemDesc.setText(item.getDescription());
             itemPrice.setText("$ "+item.getPrice());
-            itemNumberAdded.setText(String.valueOf(item.getCount()));
+            itemNumberAdded.setText(String.valueOf(1));
 
         }
     }
