@@ -5,10 +5,13 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
+import ddd.magdy.fashione_commerace.model.ProductResponseItem;
 import ddd.magdy.fashione_commerace.utils.Constant;
 
-@Database(entities = {ProductItem.class}, version = 1)
+@Database(entities = {ProductResponseItem.class}, version = 2)
+@TypeConverters(Converter.class)
 public abstract class ProductDatabase extends RoomDatabase {
 
     public abstract ProductDao productDao();

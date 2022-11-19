@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ddd.magdy.fashione_commerace.database.ProductDatabase;
-import ddd.magdy.fashione_commerace.database.ProductItem;
 import ddd.magdy.fashione_commerace.model.CartItem;
 import ddd.magdy.fashione_commerace.model.ProductResponseItem;
 import ddd.magdy.fashione_commerace.network.RetrofitClient;
@@ -81,17 +80,7 @@ public class CartViewModel extends ViewModel {
     }
 
 
-    public void addProduct(ProductItem productItem, Context context) {
-        showLoading.setValue(true);
-        ProductDatabase.getInstance(context).productDao().addProductItem(productItem);
-        showLoading.setValue(false);
-        Toast.makeText(context, "Product Added To Cart Successfully", Toast.LENGTH_SHORT).show();
 
-    }
-
-    public LiveData<List<ProductItem>> getAllProduct(Context context) {
-        return ProductDatabase.getInstance(context).productDao().getAllProductItem();
-    }
 
 
     public MutableLiveData<List<ProductResponseItem>> getItems() {

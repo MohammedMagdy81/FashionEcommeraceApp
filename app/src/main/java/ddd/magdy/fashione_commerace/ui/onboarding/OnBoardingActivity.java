@@ -64,17 +64,17 @@ public class OnBoardingActivity extends AppCompatActivity {
     private void setOnBoardingItems() {
         List<ItemOnBoarding> itemOnBoardingList = new ArrayList<>();
         ItemOnBoarding item1 = new ItemOnBoarding(
-                R.drawable.onboarding_image1,
+                R.drawable.onboarding_1,
                 getResources().getString(R.string.onboarding_title),
                 getResources().getString(R.string.onboarding_desc)
         );
         ItemOnBoarding item2 = new ItemOnBoarding(
-                R.drawable.onboarding_image2,
+                R.drawable.onboarding_2,
                 getResources().getString(R.string.onboarding_titlee),
                 getResources().getString(R.string.onboarding_desc)
         );
         ItemOnBoarding item3 = new ItemOnBoarding(
-                R.drawable.onboarding_image3,
+                R.drawable.onboarding_3,
                 getResources().getString(R.string.onboarding_titleee),
                 getResources().getString(R.string.onboarding_desc)
         );

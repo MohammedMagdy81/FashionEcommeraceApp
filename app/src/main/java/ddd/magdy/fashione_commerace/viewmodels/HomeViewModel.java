@@ -19,20 +19,22 @@ public class HomeViewModel extends ViewModel {
 
     public void getProducts() {
         showLoading.postValue(true);
-        RetrofitClient.getRetrofitClientInstance().getApi().getProduct().enqueue(new Callback<List<ProductResponseItem>>() {
-            @Override
-            public void onResponse(Call<List<ProductResponseItem>> call, Response<List<ProductResponseItem>> response) {
-                showLoading.setValue(false);
-                if (response.isSuccessful()) {
-                    productResponseItemMutableLiveData.setValue(response.body());
-                }
-            }
+        RetrofitClient.getRetrofitClientInstance().getApi().getProduct()
+                .enqueue(new Callback<List<ProductResponseItem>>() {
+                    @Override
+                    public void onResponse(Call<List<ProductResponseItem>> call, Response<List<ProductResponseItem>> response) {
+                        showLoading.setValue(false);
+                        if (response.isSuccessful()) {
 
-            @Override
-            public void onFailure(Call<List<ProductResponseItem>> call, Throwable t) {
-                messageError.setValue(t.getLocalizedMessage());
-            }
-        });
+                            productResponseItemMutableLiveData.setValue(response.body());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ProductResponseItem>> call, Throwable t) {
+                        messageError.setValue(t.getLocalizedMessage());
+                    }
+                });
 
 
     }

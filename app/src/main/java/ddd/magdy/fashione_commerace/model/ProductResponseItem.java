@@ -1,10 +1,14 @@
 package ddd.magdy.fashione_commerace.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
 public class ProductResponseItem implements Serializable {
 
 	@SerializedName("image")
@@ -19,13 +23,40 @@ public class ProductResponseItem implements Serializable {
 	@SerializedName("description")
 	private String description;
 
+	@PrimaryKey
 	@SerializedName("id")
 	private int id;
 
 	@SerializedName("title")
 	private String title;
 
+	public void setImage(String image) {
+		this.image = image;
+	}
 
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public void setRating(Rating rating) {
+		this.rating = rating;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 	public ProductResponseItem(String category) {
 		this.category = category;

@@ -2,7 +2,6 @@ package ddd.magdy.fashione_commerace.fragments;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import ddd.magdy.fashione_commerace.R;
-import ddd.magdy.fashione_commerace.adapter.CartAdapter;
-import ddd.magdy.fashione_commerace.database.ProductItem;
 import ddd.magdy.fashione_commerace.databinding.FragmentCartShoppingBinding;
-import ddd.magdy.fashione_commerace.model.ProductResponseItem;
-import ddd.magdy.fashione_commerace.model.ProductsItem;
 import ddd.magdy.fashione_commerace.viewmodels.CartViewModel;
 
 public class CartShoppingFragment extends Fragment {
@@ -30,7 +22,6 @@ public class CartShoppingFragment extends Fragment {
 
     private FragmentCartShoppingBinding binding;
     private CartViewModel viewModel;
-    private CartAdapter adapter;
     private double totalPrice = 0;
     private int totalCountIte = 0;
 
@@ -38,7 +29,6 @@ public class CartShoppingFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(CartViewModel.class);
-        adapter = new CartAdapter(new ArrayList<>(), requireContext());
     }
 
     @Override
@@ -56,7 +46,6 @@ public class CartShoppingFragment extends Fragment {
         setRecyclerView();
         //viewModel.getCartItems();
         viewModel.getItems().observe(getViewLifecycleOwner(), productResponseItemList -> {
-            adapter.setData(productResponseItemList);
         });
 
 
@@ -91,7 +80,6 @@ public class CartShoppingFragment extends Fragment {
     }
 
     private void setRecyclerView() {
-        binding.cartShoppingItemRv.setAdapter(adapter);
         binding.cartShoppingItemRv.setHasFixedSize(true);
     }
 }

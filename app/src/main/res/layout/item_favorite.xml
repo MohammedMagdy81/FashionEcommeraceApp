@@ -88,45 +88,17 @@
         android:layout_marginEnd="12dp"
         android:padding="6dp"
         android:weightSum="3"
-        android:background="@drawable/layout_product_detail_stack_bg"
+        android:background="@drawable/login_btn_bg"
         android:layout_marginBottom="16dp">
 
-        <ImageButton
-            android:id="@+id/item_cart_btn_remove"
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:layout_margin="4dp"
-            android:focusable="false"
-            android:clickable="false"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_remove" />
-
-
-        <TextView
-            android:id="@+id/item_cart_number_added"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1"
-            android:layout_margin="4dp"
-            android:textSize="16sp"
-            android:padding="3dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            />
-
-        <ImageButton
-            android:id="@+id/item_cart_btn_add"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_add"
-            android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:focusable="false"
-            android:clickable="false"
-
-            android:background="@android:color/transparent"
-            />
+     <TextView
+         android:id="@+id/item_favorite_add_tocart_text"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:textColor="@color/white"
+         android:padding="4dp"
+         android:textStyle="bold"
+         android:text="@string/add_to_cart"/>
 
     </LinearLayout>
 

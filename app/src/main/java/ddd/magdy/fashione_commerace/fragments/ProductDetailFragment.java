@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
 import ddd.magdy.fashione_commerace.R;
-import ddd.magdy.fashione_commerace.database.ProductItem;
 import ddd.magdy.fashione_commerace.databinding.FragmentProductDetailBinding;
 import ddd.magdy.fashione_commerace.model.ProductResponseItem;
 import ddd.magdy.fashione_commerace.utils.Constant;

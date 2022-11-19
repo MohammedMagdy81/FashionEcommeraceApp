@@ -16,6 +16,7 @@ import ddd.magdy.fashione_commerace.databinding.FragmentProfileBinding;
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,12 +32,30 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setUpClick() {
-        binding.profileIconSettings.setOnClickListener(v->{
-           requireActivity().getSupportFragmentManager()
-                   .beginTransaction()
-                   .replace(R.id.container_fragment,new SettingsFragment())
-                   .addToBackStack(null)
-                   .commit();
+        binding.profileIconSettings.setOnClickListener(v -> {
+            replaceFragment(new SettingsFragment());
+        });
+        binding.profileLayoutSettings.setOnClickListener(v -> {
+            replaceFragment(new SettingsFragment());
+        });
+        binding.profileLayoutMyFavorites.setOnClickListener(v -> {
+            replaceFragment(new FavoriteFragment());
         });
     }
+
+
+    void replaceFragment(Fragment fragment) {
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_fragment, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+
 }
+
+
+
+
+

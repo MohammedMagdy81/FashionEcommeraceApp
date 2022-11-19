@@ -55,6 +55,8 @@
     <string name="logout">LogOut</string>
     <string name="activities">Activities</string>
     <string name="messages">Messages</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="add_to_cart">Add to cart</string>
 
 
 </resources>

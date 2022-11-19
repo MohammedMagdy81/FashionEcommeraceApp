@@ -38,6 +38,11 @@ public class CategoryDetailsAdapter extends RecyclerView.Adapter<CategoryDetails
         void onItemDetailClick(int position, ProductResponseItem item);
     }
 
+    public OnItemFavoriteClick itemFavoriteClick;
+    public interface OnItemFavoriteClick {
+        void onItemFavoriteClick(ProductResponseItem item);
+    }
+
     @NonNull
     @Override
     public CategoryDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,6 +60,12 @@ public class CategoryDetailsAdapter extends RecyclerView.Adapter<CategoryDetails
                 onItemDetailClickListener.onItemDetailClick(position, product);
             });
         }
+        if (itemFavoriteClick!=null){
+            holder.imageFavorite.setOnClickListener(v -> {
+                itemFavoriteClick.onItemFavoriteClick(product);
+            });
+
+        }
 
 
     }
@@ -66,7 +77,7 @@ public class CategoryDetailsAdapter extends RecyclerView.Adapter<CategoryDetails
 
     class CategoryDetailsViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imageItem;
+        ImageView imageItem, imageFavorite;
         TextView mItemName, mItemPrice, mItemDesc;
 
 
@@ -76,6 +87,7 @@ public class CategoryDetailsAdapter extends RecyclerView.Adapter<CategoryDetails
             mItemName = itemView.findViewById(R.id.item__product_name_detail);
             mItemPrice = itemView.findViewById(R.id.item__product_price_detail);
             mItemDesc = itemView.findViewById(R.id.item__product_desc_detail);
+            imageFavorite = itemView.findViewById(R.id.item_category_favorite_icon);
         }
 
 

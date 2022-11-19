@@ -43,6 +43,7 @@
                 android:layout_margin="12dp"
                 android:background="@drawable/onboarding_elips"/>
             <ImageView
+                android:id="@+id/item_category_favorite_icon"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_fav"

@@ -21,7 +21,8 @@ import ddd.magdy.fashione_commerace.model.ProductResponseItem;
 import ddd.magdy.fashione_commerace.utils.Constant;
 import ddd.magdy.fashione_commerace.viewmodels.CategoryDetailsViewModel;
 
-public class HomeDetailsFragment extends Fragment implements CategoryDetailsAdapter.OnItemDetailClickListener {
+public class HomeDetailsFragment extends Fragment implements CategoryDetailsAdapter.OnItemDetailClickListener,
+        CategoryDetailsAdapter.OnItemFavoriteClick {
 
     private FragmentHomeDetailsBinding binding;
     private CategoryDetailsAdapter adapter;
@@ -35,7 +36,7 @@ public class HomeDetailsFragment extends Fragment implements CategoryDetailsAdap
         super.onCreate(savedInstanceState);
         adapter = new CategoryDetailsAdapter(requireContext());
         viewModel = new ViewModelProvider((ViewModelStoreOwner) requireContext()).get(CategoryDetailsViewModel.class);
-        bundle= new Bundle();
+        bundle = new Bundle();
         fragment = new ProductDetailFragment();
     }
 
@@ -51,6 +52,7 @@ public class HomeDetailsFragment extends Fragment implements CategoryDetailsAdap
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         adapter.onItemDetailClickListener = this::onItemDetailClick;
+        adapter.itemFavoriteClick = this::onItemFavoriteClick;
         Bundle bundle = this.getArguments();
         ProductResponseItem item = (ProductResponseItem) bundle.getSerializable(Constant.PRODUCT_ITEM_KEY);
         binding.homeDetailProductName.setText(item.getCategory());
@@ -96,11 +98,23 @@ public class HomeDetailsFragment extends Fragment implements CategoryDetailsAdap
 
     @Override
     public void onItemDetailClick(int position, ProductResponseItem item) {
-        bundle.putSerializable(Constant.PRODUCT_DETAIL_ITEM_KEY,item);
+        bundle.putSerializable(Constant.PRODUCT_DETAIL_ITEM_KEY, item);
         fragment.setArguments(bundle);
         requireActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container_fragment, fragment)
                 .addToBackStack(null)
                 .commit();
     }
+
+    @Override
+    public void onItemFavoriteClick(ProductResponseItem item) {
+        viewModel.addItemToDB(item, requireContext());
+        Toast.makeText(requireContext(), "item Added Successfully to Wishlist", Toast.LENGTH_SHORT).show();
+    }
 }
+
+
+
+
+
+

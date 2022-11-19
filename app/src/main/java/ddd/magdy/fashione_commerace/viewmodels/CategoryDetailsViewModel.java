@@ -1,18 +1,21 @@
 package ddd.magdy.fashione_commerace.viewmodels;
 
+import android.content.Context;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import ddd.magdy.fashione_commerace.database.ProductDatabase;
 import ddd.magdy.fashione_commerace.model.ProductResponseItem;
 import ddd.magdy.fashione_commerace.network.RetrofitClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CategoryDetailsViewModel
-        extends ViewModel {
+public class CategoryDetailsViewModel extends ViewModel {
+
     private MutableLiveData<List<ProductResponseItem>> productResponseItemMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> showLoading = new MutableLiveData<>(false);
     public MutableLiveData<String> messageError = new MutableLiveData<>();
@@ -44,6 +47,10 @@ public class CategoryDetailsViewModel
         return productResponseItemMutableLiveData;
     }
 
+    public void addItemToDB(ProductResponseItem item, Context context) {
+        ProductDatabase.getInstance(context).productDao()
+                .addProductItem(item);
+    }
 }
 
 
