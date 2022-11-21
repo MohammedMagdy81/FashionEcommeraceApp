@@ -96,7 +96,8 @@
                 android:layout_height="0dp"
                 android:layout_margin="12dp"
                 android:elevation="32dp"
-                android:scaleType="fitXY"
+
+                android:scaleType="centerInside"
                 app:layout_constraintBottom_toTopOf="@id/product_detail_icon_favorite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -325,6 +326,7 @@
                 app:layout_constraintTop_toTopOf="@id/product_detail_layout_sizes">
 
                 <ImageButton
+                    android:id="@+id/product_detail_color1"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:backgroundTint="@color/teal_700"
@@ -332,6 +334,7 @@
                     android:src="@drawable/ic_check"
                    />
                 <ImageButton
+                    android:id="@+id/product_detail_color2"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:background="@drawable/circle_buttons_colors"
@@ -339,6 +342,7 @@
                     android:layout_marginStart="6dp"
                     />
                 <ImageButton
+                    android:id="@+id/product_detail_color3"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:backgroundTint="@color/test2"
@@ -346,6 +350,7 @@
                     android:background="@drawable/circle_buttons_colors"
                     />
                 <ImageButton
+                    android:id="@+id/product_detail_color4"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="6dp"

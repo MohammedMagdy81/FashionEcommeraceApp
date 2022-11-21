@@ -63,11 +63,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/layout_profile_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/image_review2"
+                        android:src="@drawable/user"
                         android:orientation="horizontal" />
                 </androidx.cardview.widget.CardView>
 
@@ -78,7 +78,7 @@
                     android:layout_marginStart="13dp"
                     android:layout_marginTop="12dp"
                     android:text="Mohamed Magdy"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/text_color"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/card_profile_image"
@@ -90,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="momagdy@gmail.com"
-                    android:textColor="@color/dark_grey"
+                    android:textColor="?attr/hint_color"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/profile_name"
                     app:layout_constraintTop_toBottomOf="@id/profile_name" />
@@ -148,8 +148,7 @@
                         android:gravity="start"
                         android:layout_marginStart="14dp"
                         android:text="@string/personal_details"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textColor="?attr/text_color"                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -191,8 +190,7 @@
                         android:gravity="start"
                         android:layout_marginStart="14dp"
                         android:text="@string/my_order"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textColor="?attr/text_color"                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -234,8 +232,7 @@
                         android:gravity="start"
                         android:layout_marginStart="14dp"
                         android:text="@string/my_favorites"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textColor="?attr/text_color"                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -277,8 +274,7 @@
                         android:gravity="start"
                         android:layout_marginStart="14dp"
                         android:text="@string/shipping_address"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textColor="?attr/text_color"                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -320,8 +316,7 @@
                         android:gravity="start"
                         android:layout_marginStart="14dp"
                         android:text="@string/my_card"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textColor="?attr/text_color"                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -363,8 +358,7 @@
                         android:gravity="start"
                         android:layout_marginStart="14dp"
                         android:text="@string/settings"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textColor="?attr/text_color"                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -430,8 +424,7 @@
                         android:gravity="start"
                         android:layout_marginStart="14dp"
                         android:text="FAQs"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textColor="?attr/text_color"                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -473,8 +466,7 @@
                         android:gravity="start"
                         android:layout_marginStart="14dp"
                         android:text="@string/privacy_policy"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:textColor="?attr/text_color"                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <ImageView

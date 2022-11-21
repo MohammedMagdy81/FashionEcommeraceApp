@@ -46,6 +46,7 @@ public class FavoriteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.favoriteRecyclerView.setAdapter(adapter);
+        binding.favoriteRecyclerView.setHasFixedSize(true);
         viewModel.getAllFavoriteList(requireContext()).observe(getViewLifecycleOwner(), productResponseItemList -> {
             adapter.setData(productResponseItemList);
         });

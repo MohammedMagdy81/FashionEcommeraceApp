@@ -68,6 +68,9 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.WishLi
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade(200))
                     .into(itemImage);
+            itemTitle.setText(item.getTitle());
+            itemDesc.setText(item.getDescription());
+            itemPrice.setText("$ "+item.getPrice());
         }
     }
 }

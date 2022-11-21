@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,18 +45,9 @@ public class ProductDetailFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(CartViewModel.class);
         setUpClickListener();
         receivedData();
-        observeToField();
+
     }
 
-    private void observeToField() {
-        viewModel.showLoading.observe(getViewLifecycleOwner(), show -> {
-            if (show) {
-                binding.productDetailProgress.setVisibility(View.VISIBLE);
-            } else {
-                binding.productDetailProgress.setVisibility(View.INVISIBLE);
-            }
-        });
-    }
 
     private void receivedData() {
         Bundle bundle = this.getArguments();
@@ -108,27 +100,33 @@ public class ProductDetailFragment extends Fragment {
             }
 
         });
+        binding.productDetailLayoutAddToCartSmall.setOnClickListener(v -> {
 
-        binding.productDetailLayoutAddToCartSmall.setOnClickListener(v->{
-            putItemInRetrofit();
 
         });
-//        binding.productDetailLayoutAddToCartSmall.setOnClickListener(v -> {
-//
-//            ProductItem productItem = new ProductItem(
-//                    productResponseItem.getId(),
-//                    productResponseItem.getImage(),
-//                    productResponseItem.getTitle(),
-//                    productResponseItem.getDescription(),
-//                    numOfItem,
-//                    totalPrice);
-//            viewModel.addProduct(productItem, requireContext());
-//        });
-    }
+        binding.productDetailColor1.setOnClickListener(v -> {
+            changeButtonsColor(binding.productDetailColor1, binding.productDetailColor2, binding.productDetailColor3,
+                    binding.productDetailColor4);
+        });
+        binding.productDetailColor2.setOnClickListener(v -> {
+            changeButtonsColor(binding.productDetailColor2, binding.productDetailColor1, binding.productDetailColor3,
+                    binding.productDetailColor4);
+        });
+        binding.productDetailColor3.setOnClickListener(v -> {
+            changeButtonsColor(binding.productDetailColor3, binding.productDetailColor2, binding.productDetailColor1,
+                    binding.productDetailColor4);
+        });
+        binding.productDetailColor4.setOnClickListener(v -> {
+            changeButtonsColor(binding.productDetailColor4, binding.productDetailColor2, binding.productDetailColor3,
+                    binding.productDetailColor1);
+        });
 
-    private void putItemInRetrofit() {
-     viewModel.addToCart(productResponseItem);
-        Toast.makeText(requireContext(), "ItemAdded Successfully", Toast.LENGTH_SHORT).show();
+        binding.productDetailIconFavorite.setOnClickListener(v -> {
+            viewModel.addToDB(requireContext(), productResponseItem);
+            Toast.makeText(requireContext(), "Item Added Successfully", Toast.LENGTH_SHORT).show();
+
+        });
+
     }
 
 
@@ -148,7 +146,31 @@ public class ProductDetailFragment extends Fragment {
         TextView textView3 = (TextView) view3;
         textView3.setTextColor(Color.BLACK);
     }
+
+    void changeButtonsColor(ImageButton btn1, ImageButton btn2, ImageButton btn3, ImageButton btn4) {
+        btn1.setImageDrawable(ContextCompat
+                .getDrawable(requireContext(), R.drawable.ic_check));
+        btn2.setImageDrawable(null);
+        btn3.setImageDrawable(null);
+        btn4.setImageDrawable(null);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

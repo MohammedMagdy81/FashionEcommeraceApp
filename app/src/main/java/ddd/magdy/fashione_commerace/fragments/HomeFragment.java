@@ -27,6 +27,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private CategoryAdapter adapter;
     private HomeViewModel viewModel;
+
     private HomeDetailsFragment fragment;
     Bundle bundle;
 

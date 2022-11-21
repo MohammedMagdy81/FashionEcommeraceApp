@@ -59,6 +59,9 @@ dependencies {
     //firestore
     implementation 'com.google.firebase:firebase-firestore'
 
+    // storage
+    implementation 'com.google.firebase:firebase-storage'
+
 
     // view model - lifecycle - live data
     def lifecycle_version = "2.6.0-alpha03"

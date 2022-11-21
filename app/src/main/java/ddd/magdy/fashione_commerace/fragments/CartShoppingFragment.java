@@ -45,19 +45,6 @@ public class CartShoppingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setRecyclerView();
         //viewModel.getCartItems();
-        viewModel.getItems().observe(getViewLifecycleOwner(), productResponseItemList -> {
-        });
-
-
-
-
-
-
-
-
-
-
-
         //viewModel.getCartItems();
 //        viewModel.getAllProduct(requireContext()).observe(getViewLifecycleOwner(), productItems -> {
 //            if (productItems.size()==0){

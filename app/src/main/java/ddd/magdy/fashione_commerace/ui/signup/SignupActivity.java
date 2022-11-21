@@ -36,6 +36,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpNavigator
         setContentView(binding.getRoot());
         viewModel = new ViewModelProvider(this).get(SignupViewModel.class);
         viewModel.navigator = this;
+
         observeToField();
         setUpClickListener();
         setupIconVisible();
@@ -47,14 +48,11 @@ public class SignupActivity extends AppCompatActivity implements SignUpNavigator
         binding.signupEditTextUserName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
                 if (binding.signupEditTextUserName.getText().length() > 0) {
@@ -71,6 +69,7 @@ public class SignupActivity extends AppCompatActivity implements SignUpNavigator
         binding.signupEditTextUserName.
                 setCompoundDrawablesWithIntrinsicBounds(null, null, drawable
                         , null);
+
     }
 
 
@@ -106,6 +105,12 @@ public class SignupActivity extends AppCompatActivity implements SignUpNavigator
             String userName = binding.signupEditTextUserName.getText().toString();
             viewModel.createUserWithEmailAndPassword(email, password, confirmPassword, userName);
 
+
+        });
+
+        binding.signupCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            binding.signupBtnSignUp.setClickable(isChecked);
+            binding.signupBtnSignUp.setEnabled(isChecked);
 
         });
     }

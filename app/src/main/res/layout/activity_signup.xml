@@ -182,9 +182,12 @@
             android:id="@+id/signup_btn_sign_up"
             style="@style/AuthBtnSignup"
             android:text="@string/sign_up"
+            android:enabled="false"
+
             android:background ="@drawable/signup_btn_bg"
             android:layout_marginTop="29dp"
             app:layout_constraintEnd_toEndOf="parent"
+            android:clickable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="16dp"
             app:layout_constraintStart_toStartOf="parent"

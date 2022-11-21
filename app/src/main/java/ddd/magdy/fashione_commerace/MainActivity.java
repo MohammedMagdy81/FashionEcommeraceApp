@@ -1,6 +1,7 @@
 package ddd.magdy.fashione_commerace;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
@@ -19,11 +20,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            //set dark theme
+            setTheme(R.style.Theme_Dark);
+        } else {
+            setTheme(R.style.Theme_Light);
+        }
+
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         replaceFragment(new HomeFragment());
-        binding.bottomNavigation.setItemSelected(R.id.home_item,true);
+        binding.bottomNavigation.setItemSelected(R.id.home_item, true);
         binding.bottomNavigation.setOnItemSelectedListener(id -> {
             switch (id) {
                 case R.id.home_item:
