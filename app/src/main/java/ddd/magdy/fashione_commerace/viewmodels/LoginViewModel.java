@@ -21,10 +21,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
 
+import ddd.magdy.fashione_commerace.model.User;
 import ddd.magdy.fashione_commerace.ui.login.LoginNavigator;
+import ddd.magdy.fashione_commerace.utils.Constant;
 
 public class LoginViewModel extends ViewModel {
 
@@ -33,10 +37,12 @@ public class LoginViewModel extends ViewModel {
     public MutableLiveData<String> messageError = new MutableLiveData<>();
     public MutableLiveData<Boolean> showLoading = new MutableLiveData();
     public CallbackManager callbackManager = CallbackManager.Factory.create();
+
     ;
 
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
+    public FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     public LoginNavigator navigator;
 
@@ -48,6 +54,12 @@ public class LoginViewModel extends ViewModel {
                     showLoading.postValue(false);
                     if (task.isSuccessful()) {
                         // goToHome
+                        reteriveUser(auth.getCurrentUser().getUid(), task1 -> {
+                            if (task1.isSuccessful()) {
+                                User user = task1.getResult().toObject(User.class);
+                                Constant.user = user;
+                            }
+                        });
                         navigator.goToSuccess();
                     } else {
                         messageError.setValue(task.getException().getMessage());
@@ -62,14 +74,11 @@ public class LoginViewModel extends ViewModel {
 
     public void handleFacebookAccessToken(AccessToken token) {
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        auth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    navigator.goToSuccess();
-                } else {
-                    messageError.setValue(task.getException().getMessage());
-                }
+        auth.signInWithCredential(credential).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                navigator.goToSuccess();
+            } else {
+                messageError.setValue(task.getException().getMessage());
             }
         });
     }
@@ -121,5 +130,12 @@ public class LoginViewModel extends ViewModel {
 
     }
 
+    public void reteriveUser(String userId, OnCompleteListener<DocumentSnapshot> onCompleteListener) {
+        firestore.collection(Constant.USER_COLLECTION)
+                .document(userId)
+                .get()
+                .addOnCompleteListener(onCompleteListener);
+
+    }
 
 }

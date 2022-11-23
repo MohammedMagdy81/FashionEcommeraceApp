@@ -1,14 +1,25 @@
 package ddd.magdy.fashione_commerace.viewmodels;
 
+import android.util.Log;
+
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import ddd.magdy.fashione_commerace.model.LoginAuthUser;
+import ddd.magdy.fashione_commerace.model.LoginResponse;
+import ddd.magdy.fashione_commerace.model.ResponseUserItem;
 import ddd.magdy.fashione_commerace.model.User;
+import ddd.magdy.fashione_commerace.network.RetrofitApi;
+import ddd.magdy.fashione_commerace.network.RetrofitClient;
 import ddd.magdy.fashione_commerace.ui.signup.SignUpNavigator;
 import ddd.magdy.fashione_commerace.utils.Constant;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SignupViewModel extends ViewModel {
 
@@ -22,7 +33,7 @@ public class SignupViewModel extends ViewModel {
     private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     public void createUserWithEmailAndPassword(String email, String password,
-                                                String confirmPassword, String userName) {
+                                               String confirmPassword, String userName) {
 
 
         if (!checkValidation(email, userName, password, confirmPassword)) return;
@@ -32,7 +43,7 @@ public class SignupViewModel extends ViewModel {
                     showLoading.setValue(false);
                     if (authResult.isSuccessful()) {
                         addUserToFirestore(auth.getCurrentUser().getUid(), email, userName);
-
+                        Constant.user = new User(userName, email, "", auth.getCurrentUser().getUid());
                     } else {
                         messageError.setValue(authResult.getException().getLocalizedMessage());
                     }
@@ -44,6 +55,7 @@ public class SignupViewModel extends ViewModel {
                 });
 
     }
+
 
     private void addUserToFirestore(String uid, String email, String userName) {
         User user = new User(userName, email, "", uid);
@@ -75,4 +87,15 @@ public class SignupViewModel extends ViewModel {
         }
         return true;
     }
+
 }
+
+
+
+
+
+
+
+
+
+

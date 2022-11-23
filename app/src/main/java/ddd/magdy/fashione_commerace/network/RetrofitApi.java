@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ddd.magdy.fashione_commerace.model.CartItem;
+import ddd.magdy.fashione_commerace.model.LoginAuthUser;
+import ddd.magdy.fashione_commerace.model.LoginResponse;
 import ddd.magdy.fashione_commerace.model.ProductResponseItem;
 import ddd.magdy.fashione_commerace.model.ResponseUserItem;
 import ddd.magdy.fashione_commerace.utils.Constant;
@@ -43,8 +45,14 @@ public interface RetrofitApi {
     Call<List<ResponseUserItem>> getAllUsers();
 
     @GET("users/{id}")
-    Call<ResponseUserItem> getUserById(@Path("id") int id);
+    Response<ResponseUserItem> getUserById(@Path("id") int id);
 
+
+    @POST("auth/login")
+    Response<LoginResponse> loginUser(@Body LoginAuthUser user);
 
 
 }
+
+
+

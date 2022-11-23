@@ -24,6 +24,7 @@ public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
     private ProfileViewModel viewModel;
+    private MessageListFragment fragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +37,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        fragment = new MessageListFragment();
         viewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
         viewModel.getUserData();
         setUpClick();
@@ -44,16 +46,16 @@ public class ProfileFragment extends Fragment {
 
     private void observeToData() {
         viewModel.email.observe(getViewLifecycleOwner(), email -> {
-            if (!email.isEmpty()){
+            if (!email.isEmpty()) {
                 binding.profileEmail.setText(email);
             }
         });
         viewModel.userName.observe(getViewLifecycleOwner(), userName -> {
-           if (!userName.isEmpty()){
-               binding.profileName.setText(userName);
-           }
+            if (!userName.isEmpty()) {
+                binding.profileName.setText(userName);
+            }
         });
-        viewModel.userImage.observe(getViewLifecycleOwner(),userImage->{
+        viewModel.userImage.observe(getViewLifecycleOwner(), userImage -> {
 
             Glide.with(requireContext())
                     .load(userImage)
@@ -74,6 +76,18 @@ public class ProfileFragment extends Fragment {
         binding.profileLayoutMyFavorites.setOnClickListener(v -> {
             replaceFragment(new FavoriteFragment());
         });
+
+        binding.profileLayoutPersonalDetails.setOnClickListener(v -> {
+            goToMessageList();
+        });
+    }
+
+    private void goToMessageList() {
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_fragment, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 

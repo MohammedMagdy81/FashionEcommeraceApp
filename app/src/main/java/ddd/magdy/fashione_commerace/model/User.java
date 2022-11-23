@@ -7,7 +7,10 @@ public class User {
     private String email;
     private String imagePath;
 
-    public User(String userName, String email, String imagePath,String id) {
+    public User() {
+    }
+
+    public User(String userName, String email, String imagePath, String id) {
         this.userName = userName;
         this.email = email;
         this.imagePath = imagePath;

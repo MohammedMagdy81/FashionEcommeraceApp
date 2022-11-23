@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/item_message_text"
+        android:id="@+id/item_message_text_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
@@ -22,15 +22,15 @@
         />
 
     <TextView
-        android:id="@+id/item_message_time"
+        android:id="@+id/item_message_time_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:text="4:16 am"
         android:gravity="center"
         android:textColor="@color/dark_grey"
-        app:layout_constraintTop_toBottomOf="@id/item_message_text"
-        app:layout_constraintEnd_toEndOf="@id/item_message_text"
+        app:layout_constraintTop_toBottomOf="@id/item_message_text_send"
+       app:layout_constraintStart_toStartOf="@id/item_message_text_send"
         android:layout_marginTop="4dp"
 
         />

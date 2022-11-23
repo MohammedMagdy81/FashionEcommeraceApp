@@ -3,6 +3,7 @@ package ddd.magdy.fashione_commerace.fragments;
 import static android.app.Activity.RESULT_OK;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -42,10 +44,11 @@ import java.util.UUID;
 
 import ddd.magdy.fashione_commerace.R;
 import ddd.magdy.fashione_commerace.databinding.FragmentSettingsBinding;
+import ddd.magdy.fashione_commerace.ui.splash.SplashActivity;
 import ddd.magdy.fashione_commerace.viewmodels.SettingsViewModel;
 
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends Fragment implements SettingsNavigator {
 
     private FragmentSettingsBinding binding;
 
@@ -67,9 +70,11 @@ public class SettingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(SettingsViewModel.class);
         progressDialog = new ProgressDialog(requireContext());
+        viewModel.navigator = this;
         setUpClickListener();
         observeToFields();
         viewModel.getUserInfo();
+        setupRadioBtnShape();
     }
 
     private void observeToFields() {
@@ -93,8 +98,6 @@ public class SettingsFragment extends Fragment {
         viewModel.imageProfile.observe(getViewLifecycleOwner(), imageString -> {
             Glide.with(requireContext())
                     .load(imageString)
-                    .centerCrop()
-                    .transition(DrawableTransitionOptions.withCrossFade(400))
                     .into(binding.settingsProfileImage);
         });
         viewModel.userNameProfile.observe(getViewLifecycleOwner(), userName -> {
@@ -107,24 +110,67 @@ public class SettingsFragment extends Fragment {
             binding.settingsEtEmail.setClickable(false);
             binding.settingsEtEmail.setEnabled(false);
         });
+
+
+    }
+
+    private void setupRadioBtnShape() {
+        binding.settingsMaleRadiobtn.setClickable(false);
+        binding.settingsMaleRadiobtn.setChecked(true);
+        binding.settingsFemaleRadiobtn.setClickable(false);
     }
 
     private void setUpClickListener() {
         binding.settingsLayoutPick.setOnClickListener(v -> {
             pickImageFromGallery();
         });
+
+        binding.settingsLayoutLogout.setOnClickListener(view -> {
+            showAlertDialog();
+        });
+
         binding.settingsSwitchDarkMode.setOnCheckedChangeListener((compoundButton, checked) -> {
             if (checked) {
                 binding.settingsTextSwitch.setText("on");
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                binding.settingsSwitchDarkMode.setChecked(true);
 
             } else {
                 binding.settingsTextSwitch.setText("off");
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
         });
+        binding.settingsLayoutLanguage.setOnClickListener(v -> {
+            goToLanguageFragment();
+        });
+        binding.settingsEtAge.setHint(String.valueOf(24));
+        binding.settingsEtAge.setClickable(false);
+        binding.settingsEtAge.setEnabled(false);
 
+    }
+
+    private void showAlertDialog() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Logout")
+                .setMessage("Are You Want to Logout From Fashion App ?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        viewModel.logout();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    private void goToLanguageFragment() {
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_fragment, new LanguageFragment())
+                .addToBackStack(null)
+                .commit();
     }
 
 
@@ -149,7 +195,7 @@ public class SettingsFragment extends Fragment {
                 try {
                     // Setting image on image view using Bitmap
                     Bitmap bitmap = MediaStore
-                            .Images
+                            .Imagea
                             .Media
                             .getBitmap(requireActivity().getContentResolver(), imageUri);
                     binding.settingsProfileImage.setImageBitmap(bitmap);
@@ -165,4 +211,10 @@ public class SettingsFragment extends Fragment {
         }
     }
 
+    @Override
+    public void navigateToSplash() {
+        Intent intent = new Intent(requireActivity(), SplashActivity.class);
+        startActivity(intent);
+        requireActivity().finish();
+    }
 }

@@ -57,6 +57,12 @@
     <string name="messages">Messages</string>
     <string name="wishlist">Wishlist</string>
     <string name="add_to_cart">Add to cart</string>
+    <string name="select_language">Select Language</string>
+    <string name="credit_cart">Credit Cart</string>
+    <string name="paypal">Paypal</string>
+    <string name="visa">Visa</string>
+    <string name="google_pay">Google Pay</string>
+    <string name="history">History</string>
 
 
 </resources>

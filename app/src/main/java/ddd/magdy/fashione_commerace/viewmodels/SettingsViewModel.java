@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -26,10 +27,12 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.UUID;
 
+import ddd.magdy.fashione_commerace.fragments.SettingsNavigator;
 import ddd.magdy.fashione_commerace.utils.Constant;
 
 public class SettingsViewModel extends ViewModel {
 
+    public SettingsNavigator navigator;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference = storage.getReference();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -61,11 +64,11 @@ public class SettingsViewModel extends ViewModel {
                         showMessageDialog.postValue("Uploaded " + (int) progress + "%");
                     });
             task.continueWithTask(task -> {
-                if (!task.isSuccessful()) {
-                    showMessage.postValue("Failed" + task.getException().toString());
-                }
-                return ref.getDownloadUrl();
-            })
+                        if (!task.isSuccessful()) {
+                            showMessage.postValue("Failed" + task.getException().toString());
+                        }
+                        return ref.getDownloadUrl();
+                    })
                     .addOnCompleteListener((OnCompleteListener<Uri>) task -> {
                         if (task.isSuccessful()) {
                             Uri downloadUri = task.getResult();
@@ -78,13 +81,13 @@ public class SettingsViewModel extends ViewModel {
                             showDialog.postValue(false);
                         }
                     });
-            getUserInfo();
+
         } else {
             showDialog.postValue(false);
             showMessage.postValue("Image Not Selected !");
         }
 
-
+        getUserInfo();
     }
 
     public void getUserInfo() {
@@ -104,6 +107,15 @@ public class SettingsViewModel extends ViewModel {
                 });
     }
 
+    public void setUpDarkMode(){
+
+
+    }
+
+    public void logout() {
+        auth.signOut();
+        navigator.navigateToSplash();
+    }
 }
 
 

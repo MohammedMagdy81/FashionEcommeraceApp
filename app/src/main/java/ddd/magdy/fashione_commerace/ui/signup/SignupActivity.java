@@ -2,6 +2,7 @@ package ddd.magdy.fashione_commerace.ui.signup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -11,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import ddd.magdy.fashione_commerace.MainActivity;
 import ddd.magdy.fashione_commerace.R;
 import ddd.magdy.fashione_commerace.SuccessActivity;
 import ddd.magdy.fashione_commerace.databinding.ActivitySignupBinding;
+import ddd.magdy.fashione_commerace.model.ResponseUserItem;
 import ddd.magdy.fashione_commerace.ui.login.LoginActivity;
 import ddd.magdy.fashione_commerace.viewmodels.SignupViewModel;
 
@@ -40,8 +43,8 @@ public class SignupActivity extends AppCompatActivity implements SignUpNavigator
         observeToField();
         setUpClickListener();
         setupIconVisible();
-    }
 
+    }
 
 
     private void setupIconVisible() {
@@ -49,10 +52,12 @@ public class SignupActivity extends AppCompatActivity implements SignUpNavigator
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
                 if (binding.signupEditTextUserName.getText().length() > 0) {

@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/item_person_image"
         android:layout_width="84dp"
         android:layout_height="84dp"
         android:layout_margin="8dp"
@@ -16,6 +17,7 @@
         />
 
     <TextView
+        android:id="@+id/item_person_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mohamed magdy"

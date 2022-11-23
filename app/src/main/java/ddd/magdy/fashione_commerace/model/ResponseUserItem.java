@@ -2,7 +2,9 @@ package ddd.magdy.fashione_commerace.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ResponseUserItem{
+import java.io.Serializable;
+
+public class ResponseUserItem implements Serializable {
 
 	@SerializedName("password")
 	private String password;

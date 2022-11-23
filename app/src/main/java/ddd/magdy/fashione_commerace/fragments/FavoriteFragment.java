@@ -1,5 +1,6 @@
 package ddd.magdy.fashione_commerace.fragments;
 
+import android.graphics.Canvas;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,10 +9,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +56,24 @@ public class FavoriteFragment extends Fragment {
             adapter.setData(productResponseItemList);
         });
 
+        swipeToDelete();
+
     }
+
+    private void swipeToDelete() {
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
 
 
 
