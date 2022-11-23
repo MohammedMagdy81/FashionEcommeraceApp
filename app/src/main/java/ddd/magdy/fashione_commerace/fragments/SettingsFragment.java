@@ -195,7 +195,7 @@ public class SettingsFragment extends Fragment implements SettingsNavigator {
                 try {
                     // Setting image on image view using Bitmap
                     Bitmap bitmap = MediaStore
-                            .Imagea
+                            .Images
                             .Media
                             .getBitmap(requireActivity().getContentResolver(), imageUri);
                     binding.settingsProfileImage.setImageBitmap(bitmap);
